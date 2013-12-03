@@ -1,0 +1,3 @@
+function [position] = coordonnees_cartesiennes(h_g, lambda, phi_g, time)
+
+end

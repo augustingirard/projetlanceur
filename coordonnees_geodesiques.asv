@@ -1,0 +1,29 @@
+function [h_g, lambda, phi_g] = coordonnees_geodesiques(position, time, precision)
+global rayon_equatorial ;
+global rayon_polaire;
+global vitesse_rotation_terre ;
+p = norm(position(1:2), 2);
+
+% calcul de la longitude lambda
+
+if position(2)>0
+    lambda_inertiel = acos(position(1), p);
+else
+    lambda_inertiel = -acos(position(1), p);
+end
+lambda = lambda_inertiel - vitesse_rotation_terre * time;
+
+% calcul de l'altitude geodesique h_g et de la latitude deodesique phi_g
+
+e2 = 1- (rayon_polaire/rayon_equatorial)^2; % carré de l'aplatissement terrestre
+r = norm(position, 2);
+
+N = rayon_equatorial;
+h_g = r - sqrt(rayon_polaire * rayon_equatorial);
+phi_g = atan( position(3)/p*(N+h_g)/(N*(1-e2)+h_g))
+
+while phi_g > precision
+    
+end
+
+end

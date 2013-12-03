@@ -1,0 +1,5 @@
+function [v] = vitesse_relative(position, vitesse_absolue)
+global vitesse_rotation_terre;
+omega = [ 0 , 0 , vitesse_rotation_terre];
+v = vitesse_absolue - cross(omega , position);
+end
